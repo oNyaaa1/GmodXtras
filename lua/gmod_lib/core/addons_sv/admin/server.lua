@@ -14,15 +14,18 @@ local function LoadPlayerTags(ply)
     if info == nil then
         lite:Insert(ply, "gmodx_admin", "admin", "u")
         info = "u"
-        print(Format("[AdminMatrix] Added default tag 'u' to %s", ply:Nick()))
+        local str = Format("[AdminMatrix] Added default tag 'u' to %s", ply:Nick())
+        ply:ChatPrint(str)
+        print(str)
     else
-        print(Format("[AdminMatrix] Has Tags tag '%s' to %s", info, ply:Nick()))
+        local str = Format("[AdminMatrix] Has Tags tag '%s' to %s", info, ply:Nick())
+        print(str)
+        ply:ChatPrint(str)
     end
 
     ply:AddUserTag(info)
 end
 
-hook.Add("PlayerInitialSpawn", "GMODXtrasAdmin", function(ply) if ply:IsFullyAuthenticated() then LoadPlayerTags(ply) end end)
 hook.Add("PlayerAuthed", "GMODXtrasAdminAuthenticated", function(ply) LoadPlayerTags(ply) end)
 local meta = FindMetaTable("Player")
 function meta:AddUserTag(tag)
