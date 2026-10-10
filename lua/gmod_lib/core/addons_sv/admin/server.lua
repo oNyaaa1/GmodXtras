@@ -1,10 +1,10 @@
 local lite = include("gmod_lib/core/server/sqlite.lua")
 GarrysModx.AdminMatrix = GarrysModx.AdminMatrix or {}
-local AdminMatrix = GarrysModx.AdminMatrix
-AdminMatrix.Tags = {
+GarrysModx.AdminMatrix.Tags = {
     ["banuser"] = "b",
     ["kickuser"] = "b",
     ["adduser"] = "a",
+    ["guide"] = "u",
 }
 
 hook.Add("InitPostEntity", "GMODXtrasAdmin", function() lite:CreateTable("gmodx_admin", "admin TEXT") end)

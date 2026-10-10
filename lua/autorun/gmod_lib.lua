@@ -1,4 +1,5 @@
 GarrysModx = GarrysModx or {}
+GarrysModx.Reject = false
 local function add_filessh(dir)
     local files, folders = file.Find(dir .. "*", "LUA")
     for _, file_name in pairs(files) do
