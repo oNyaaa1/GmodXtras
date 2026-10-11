@@ -13,21 +13,21 @@ end
 
 function meta:SetUserTag(name, tag, admin, global)
     global = global or false
-    if not tobool(global) then return GarrysModx.Reject end
     local info = self:GetTags()
     local find_Str = string.find(info, tag)
-    if not self:IsSuperAdmin() or tostring(find_Str) ~= "1" then return GarrysModx.Reject end
-    if not isstring(tag) then return GarrysModx.Reject end
-    local person = GarrysModx:FindPlayer(name)
-    if person == NULL then return GarrysModx.Reject end
-    lite:Insert(person, "gmodx_admin", "admin", tag)
-    self.Tags = tag
-    local str = Format("[AdminMatrix] Set Admin Tags tag '%s' to %s by %s", tag, person:Nick(), admin)
-    print(str)
-    if global == true then
-        PrintMessage(HUD_PRINTTALK, str)
-    else
-        self:ChatPrint(str)
+    if self:IsSuperAdmin() or tostring(find_Str) == "1" then
+        if not isstring(tag) then return end
+        local person = GarrysModx:FindPlayer(name:lower())
+        if person == NULL then return end
+        lite:Insert(person, "gmodx_admin", "admin", tag)
+        self:AddUserTag(tag)
+        local str = Format("[AdminMatrix] Set Admin Tags tag '%s' to %s by %s", tag, person:Nick(), admin)
+        print(str)
+        if global == true then
+            PrintMessage(HUD_PRINTTALK, str)
+        else
+            self:ChatPrint(str)
+        end
     end
 end
 

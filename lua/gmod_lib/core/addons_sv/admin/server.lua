@@ -7,15 +7,12 @@ GarrysModx.AdminMatrix.Tags = {
     ["guide"] = "u",
 }
 
-hook.Add("InitPostEntity", "GMODXtrasAdmin", function()
-    lite:CreateTable("gmodx_admin", "admin TEXT")
-end)
-
+hook.Add("InitPostEntity", "GMODXtrasAdmin", function() lite:CreateTable("gmodx_admin", "admin TEXT NOT NULL") end)
 local function LoadPlayerTags(ply)
     if not IsValid(ply) then return end
-    local info = lite:PlayerTbl(ply, "gmodx_admin")
+    local info = lite:PlayerTblAdmin(ply, "gmodx_admin")
+    print(info)
     if info == nil then
-        lite:Insert(ply, "gmodx_admin", "admin", "u")
         info = "u"
         local str = Format("[AdminMatrix] Added default tag 'u' to %s", ply:Nick())
         ply:ChatPrint(str)
@@ -33,6 +30,7 @@ hook.Add("PlayerAuthed", "GMODXtrasAdminAuthenticated", function(ply) LoadPlayer
 local meta = FindMetaTable("Player")
 function meta:AddUserTag(tag)
     if not isstring(tag) then return end
+    lite:Update(self:SteamID64(), "gmodx_admin", "admin", tag)
     self.Tags = tag
 end
 

@@ -1,6 +1,7 @@
 local sqlite = {}
 sqlite.__index = sqlite
 function sqlite:CreateTable(tblname, info)
+    if sql.TableExists(tblname) then return true end
     local query = string.format("CREATE TABLE IF NOT EXISTS %s (SteamID64 TEXT PRIMARY KEY, %s)", tblname, info)
     local result = sql.Query(query)
     if result == false then
@@ -45,12 +46,17 @@ function sqlite:Update(sid, tblname, column, value)
 end
 
 function sqlite:PlayerTbl(ply, tblname)
-    if not IsValid(ply) then return nil end
-    return sql.QueryValue(string.format("SELECT * FROM %s WHERE SteamID64 = %s", tblname, sql.SQLStr(ply:SteamID64())))
+    local query = sql.Query(string.format("SELECT * FROM %s WHERE SteamID64 = %s", tblname, sql.SQLStr(ply:SteamID64())))
+    return query
+end
+
+function sqlite:PlayerTblAdmin(ply, tblname)
+    local query = sql.Query(string.format("SELECT admin FROM %s WHERE SteamID64 = %s", tblname, sql.SQLStr(ply:SteamID64())))
+    return query[1]["admin"]
 end
 
 function sqlite:PlayerTblSid(sid, tblname)
-    return sql.QueryValue(string.format("SELECT * FROM %s WHERE SteamID64 = %s", tblname, sid))
+    local query = sql.Query(string.format("SELECT * FROM %s WHERE SteamID64 = %s", tblname, sid))
+    return query
 end
-
 return sqlite
