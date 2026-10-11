@@ -7,7 +7,10 @@ GarrysModx.AdminMatrix.Tags = {
     ["guide"] = "u",
 }
 
-hook.Add("InitPostEntity", "GMODXtrasAdmin", function() lite:CreateTable("gmodx_admin", "admin TEXT") end)
+hook.Add("InitPostEntity", "GMODXtrasAdmin", function()
+    lite:CreateTable("gmodx_admin", "admin TEXT")
+end)
+
 local function LoadPlayerTags(ply)
     if not IsValid(ply) then return end
     local info = lite:PlayerTbl(ply, "gmodx_admin")
