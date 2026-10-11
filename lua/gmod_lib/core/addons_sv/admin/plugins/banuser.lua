@@ -12,6 +12,8 @@ end
 
 function UpdateBanList(sid)
     local tbl = GarrysModx:SpecialFind()
+    local Timer = {}
+    local name = ""
     for k, v in pairs(tbl) do
         if v.SteamID == sid then
             local Times = v.Time
@@ -19,11 +21,21 @@ function UpdateBanList(sid)
             tbl[k] = {
                 SteamID = sid,
                 Time = Times,
-                REASON = v.REASON
+                REASON = v.REASON,
+                Nick = v.Nick
             }
 
-            if tonumber(Times) <= 0 then table.remove(tbl, k) end
+            name = v.Nick
+            if tonumber(Times) <= 0 then
+                Timer[sid] = true
+                table.remove(tbl, k)
+            end
         end
+    end
+
+    if Timer[sid] then
+        print("[GMODx] Unbanned Player " .. sid .. " Nick: " .. name)
+        Timer[sid] = nil
     end
 
     file.Write("gmodx_banuser/ban.txt", util.TableToJSON(tbl, true))
@@ -44,15 +56,21 @@ function meta:BanUser(sid, time, reason)
         if v == sid then alrbanned = true end
     end
 
+    if string.find(self:GetTags(), "z") then
+        print("[GmodX] Immortal from being banned")
+        return
+    end
+
     if alrbanned == true then print("[GmodX] Already Banned") end
     table.insert(tbl, {
         SteamID = sid,
         Time = time,
-        REASON = reason
+        REASON = reason,
+        Nick = sql.SQLStr(self:Nick())
     })
 
     file.Write("gmodx_banuser/ban.txt", util.TableToJSON(tbl, true))
-    self:Kick(reason)
+    self:Kick(reason .. "\nTime Left: " .. tostring(string.FormattedTime(time, "Minutes:%02i Seconds:%02i")))
 end
 
 concommand.Add("gmodx_banuser", function(ply, cmd, args)
@@ -65,12 +83,14 @@ hook.Add("CheckPassword", "access_whitelist", function(steamID64)
     local tbl = GarrysModx:SpecialFind()
     local str = NULL
     local reason = NULL
+    local length = 0
     for k, v in pairs(tbl) do
         if v.SteamID == steamID64 then
             str = v.SteamID
             reason = v.REASON
+            length = v.Time
         end
     end
 
-    if str ~= NULL and str then return false, "Dropped Reason: " .. reason end
+    if str ~= NULL and str then return false, "Dropped Reason: " .. reason .. "\nTime Left: " .. tostring(string.FormattedTime(length, "Minutes:%02i Seconds:%02i")) end
 end)

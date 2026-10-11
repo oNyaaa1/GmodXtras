@@ -45,9 +45,9 @@ function sqlite:Update(sid, tblname, column, value)
     return true
 end
 
-function sqlite:PlayerTbl(ply, tblname)
+function sqlite:PlayerTbl(ply, pn, tblname)
     local query = sql.Query(string.format("SELECT * FROM %s WHERE SteamID64 = %s", tblname, sql.SQLStr(ply:SteamID64())))
-    return query
+    return query[1][pn]
 end
 
 function sqlite:PlayerTblAdmin(ply, tblname)
@@ -55,8 +55,8 @@ function sqlite:PlayerTblAdmin(ply, tblname)
     return query[1]["admin"]
 end
 
-function sqlite:PlayerTblSid(sid, tblname)
+function sqlite:PlayerTblSid(sid, pn, tblname)
     local query = sql.Query(string.format("SELECT * FROM %s WHERE SteamID64 = %s", tblname, sid))
-    return query
+    return query[1][pn]
 end
 return sqlite
