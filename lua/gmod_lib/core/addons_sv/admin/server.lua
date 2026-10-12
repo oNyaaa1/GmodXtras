@@ -12,7 +12,6 @@ hook.Add("InitPostEntity", "GMODXtrasAdmin", function() lite:CreateTable("gmodx_
 local function LoadPlayerTags(ply)
     if not IsValid(ply) then return end
     local info = lite:PlayerTblAdmin(ply, "gmodx_admin")
-    print(info)
     if info == nil then
         info = "u"
         local str = Format("[AdminMatrix] Added default tag 'u' to %s", ply:Nick())
