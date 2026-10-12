@@ -56,7 +56,7 @@ function meta:BanUser(sid, time, reason)
         if v == sid then alrbanned = true end
     end
 
-    if string.find(self:GetTags(), "z") then
+    if string.find(self:GetTags(), GarrysModx.AdminMatrix.Tags["immunity"]) then
         print("[GmodX] Immortal from being banned")
         return
     end
@@ -74,9 +74,11 @@ function meta:BanUser(sid, time, reason)
 end
 
 concommand.Add("gmodx_banuser", function(ply, cmd, args)
-    local target = GarrysModx:FindPlayer(args[1])
-    if target == nil then return end
-    target:BanUser(target:SteamID64(), args[2], args[3])
+    if ply:IsSuperAdmin() or string.find(ply:GetTags(), GarrysModx.AdminMatrix.Tags["banuser"]) then
+        local target = GarrysModx:FindPlayer(args[1])
+        if target == nil then return end
+        target:BanUser(target:SteamID64(), args[2], args[3])
+    end
 end)
 
 hook.Add("CheckPassword", "access_whitelist", function(steamID64)

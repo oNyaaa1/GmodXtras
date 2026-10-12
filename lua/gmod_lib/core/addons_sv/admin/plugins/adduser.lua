@@ -2,6 +2,7 @@ local lite = include("gmod_lib/core/server/sqlite.lua")
 local meta = FindMetaTable("Player")
 function GarrysModx:FindPlayer(name)
     for k, v in pairs(player.GetAll()) do
+        if not isstring(name) then return nil end
         local Correcto = v:Nick():lower():find(name:lower())
         if Correcto == 1 then
             --
@@ -13,9 +14,7 @@ end
 
 function meta:SetUserTag(name, tag, admin, global)
     global = global or false
-    local info = self:GetTags()
-    local find_Str = string.find(info, tag)
-    if self:IsSuperAdmin() or tostring(find_Str) == "1" then
+    if self:IsSuperAdmin() or string.find(self:GetTags(), GarrysModx.AdminMatrix.Tags["adduser"]) then
         if not isstring(tag) then return end
         local person = GarrysModx:FindPlayer(name:lower())
         if person == NULL then return end
