@@ -58,4 +58,11 @@ GarrysModx.ChatSay = {
         if target == NULL then return end
         target:StunUser(ply, argz[3])
     end,
+    ["/slap"] = function(ply, text)
+        local argz = string.Explode(" ", text)
+        local targe = argz[2]
+        local target = GarrysModx:FindPlayer(targe)
+        if target == NULL then return end
+        target:SlapUser(ply, argz[3])
+    end,
 }

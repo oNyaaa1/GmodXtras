@@ -26,13 +26,13 @@ function meta:SetUserTag(ply, name, tag, admin, global)
         local person = GarrysModx:FindPlayer(name:lower())
         if person == NULL then return end
         lite:Insert(person, "gmodx_admin", "admin", tag)
-        self:AddUserTag(tag)
+        person:AddUserTag(tag)
         local str = Format("[GmodX] Set Admin Tags tag '%s' to %s by Admin: %s", tag, person:Nick(), admin)
         print(str)
         if global == true then
             PrintMessage(HUD_PRINTTALK, str)
         else
-            self:ChatPrint(str)
+            person:ChatPrint(str)
         end
     end
 end
@@ -40,6 +40,31 @@ end
 concommand.Add("gmodx_adduser", function(ply, cmd, args)
     --gmodx_adduser
     ply:SetUserTag(ply, tostring(args[1]), tostring(args[2]), tostring(ply:Nick()), tobool(args[3]))
+end)
+
+local function SetConsoleTag(ply, name, tag, global)
+    if IsValid(ply) then -- Console
+        return
+    end
+
+    global = global or false
+    if not isstring(tag) then return end
+    local person = GarrysModx:FindPlayer(name:lower())
+    if person == NULL then return end
+    lite:Insert(person, "gmodx_admin", "admin", tag)
+    person:AddUserTag(tag)
+    local str = Format("[GmodX] Set Admin Tags tag '%s' to %s by Admin: Console", tag, person:Nick())
+    print(str)
+    if global == true then
+        PrintMessage(HUD_PRINTTALK, str)
+    else
+        person:ChatPrint(str)
+    end
+end
+
+concommand.Add("gmodx_console_adduser", function(ply, cmd, args)
+    --gmodx_adduser
+   SetConsoleTag(ply, tostring(args[1]), tostring(args[2]), tobool(args[3]))
 end)
 
 concommand.Add("gmodx_tags", function(ply)

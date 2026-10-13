@@ -1,7 +1,7 @@
 local meta = FindMetaTable("Player")
 function meta:SlayUser(ply)
     if string.find(self:GetTags(), GarrysModx.AdminMatrix.Tags["immunity"]) and ply ~= self then
-        local str = "[GmodX] " .. tostring(self:Nick()) .. " is Immortal from being Healed except themselfs!"
+        local str = "[GmodX] " .. tostring(self:Nick()) .. " is Immortal from being Slayed except themselfs!"
         print(str)
         ply:ChatPrint(str)
         return
