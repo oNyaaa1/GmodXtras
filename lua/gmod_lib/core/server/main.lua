@@ -1,3 +1,4 @@
+local lite = include("gmod_lib/core/server/sqlite.lua")
 GarrysModx.Latex = {
     ["weapon_physgun"] = true,
     ["weapon_physcannon"] = true,
@@ -49,4 +50,7 @@ GarrysModx.ChatSay = {
         target:KickUser(ply, argz[3])
     end,
     ["/guide"] = function(ply, text) ply:ConCommand("gmodx_tutorial") end,
+    ["/tags"] = function(ply, text)
+        ply:ConCommand("gmodx_tags")
+    end,
 }

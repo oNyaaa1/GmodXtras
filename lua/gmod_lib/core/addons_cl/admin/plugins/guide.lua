@@ -17,6 +17,7 @@ GarrysModx:Guide(10, "CHAT: /kick <name> <reason>")
 GarrysModx:Guide(11, "CHAT: /ban <name> <length> <reason>")
 GarrysModx:Guide(12, "CHAT: /slay <name>")
 GarrysModx:Guide(13, "CHAT: /heal <name> <amount>")
+GarrysModx:Guide(14, "CHAT: /tags")
 function Guide:Tutorial(py)
     local str = string.find(GarrysModx.AdminMatrix.MyTags, py)
     if str then

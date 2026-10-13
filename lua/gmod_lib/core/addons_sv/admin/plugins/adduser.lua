@@ -46,7 +46,7 @@ concommand.Add("gmodx_tags", function(ply)
     local info = ply:GetTags()
     local str = Format("[GmodX] Your Admin Tags '%s'", info)
     ply:ChatPrint(str)
-    for k, v in pairs(GarrysModx.AdminMatrix.Tags) do
+    for k, v in SortedPairsByValue(GarrysModx.AdminMatrix.Tags, false) do
         ply:PrintMessage(HUD_PRINTCONSOLE, "[Command: " .. k .. "] - [Tag: " .. v .. "]\n")
     end
 end)
