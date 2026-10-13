@@ -1,4 +1,5 @@
 local lite = include("gmod_lib/core/server/sqlite.lua")
+util.AddNetworkString("gmodx_hastags")
 GarrysModx.AdminMatrix = GarrysModx.AdminMatrix or {}
 GarrysModx.AdminMatrix.Tags = {
     ["banuser"] = "b",
@@ -24,6 +25,9 @@ local function LoadPlayerTags(ply)
     end
 
     ply:AddUserTag(info)
+    net.Start("gmodx_hastags")
+    net.WriteString(info)
+    net.Send(ply)
 end
 
 hook.Add("PlayerAuthed", "GMODXtrasAdminAuthenticated", function(ply) LoadPlayerTags(ply) end)
