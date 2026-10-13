@@ -2,13 +2,14 @@ local lite = include("gmod_lib/core/server/sqlite.lua")
 util.AddNetworkString("gmodx_hastags")
 GarrysModx.AdminMatrix = GarrysModx.AdminMatrix or {}
 GarrysModx.AdminMatrix.Tags = {
-    ["banuser"] = "b",
-    ["kickuser"] = "b",
-    ["adduser"] = "a",
+    ["banuser"] = "action",
+    ["kickuser"] = "action",
+    ["adduser"] = "superuser",
     ["guide"] = "u",
-    ["immunity"] = "z",
-    ["healuser"] = "h",
-    ["slayuser"] = "s"
+    ["immunity"] = "superuser",
+    ["healuser"] = "fun",
+    ["slayuser"] = "fun",
+    ["stunuser"] = "fun"
 }
 
 hook.Add("InitPostEntity", "GMODXtrasAdmin", function() lite:CreateTable("gmodx_admin", "admin TEXT NOT NULL") end)

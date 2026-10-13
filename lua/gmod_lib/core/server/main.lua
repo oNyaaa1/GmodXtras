@@ -50,7 +50,12 @@ GarrysModx.ChatSay = {
         target:KickUser(ply, argz[3])
     end,
     ["/guide"] = function(ply, text) ply:ConCommand("gmodx_tutorial") end,
-    ["/tags"] = function(ply, text)
-        ply:ConCommand("gmodx_tags")
+    ["/tags"] = function(ply, text) ply:ConCommand("gmodx_tags") end,
+    ["/stun"] = function(ply, text)
+        local argz = string.Explode(" ", text)
+        local targe = argz[2]
+        local target = GarrysModx:FindPlayer(targe)
+        if target == NULL then return end
+        target:StunUser(ply, argz[3])
     end,
 }

@@ -11,7 +11,7 @@ local function HandleStun(ply)
 end
 
 hook.Add("StartCommand", "GMODxStunXtended", function(ply, cmd)
-    if ply.Stunned and ply:PvPModeStatus() then
+    if ply.Stunned and ply:PvPModeStatus() or ply.StunnedByAdmin then
         --Stop moving
         cmd:ClearMovement()
         cmd:SetViewAngles(Angle(math.random(math.sin(-11), math.cos(11)), math.random(math.sin(-11), math.cos(11)), 0))
