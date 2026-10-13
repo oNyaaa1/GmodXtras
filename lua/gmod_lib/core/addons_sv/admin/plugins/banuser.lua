@@ -49,7 +49,7 @@ timer.Create("UpdateBanList", 5, 0, function()
     end
 end)
 
-function meta:BanUser(sid, time, reason)
+function meta:BanUser(ply, sid, time, reason)
     local tbl = GarrysModx:SpecialFind()
     local alrbanned = false
     for k, v in pairs(tbl) do
@@ -57,7 +57,9 @@ function meta:BanUser(sid, time, reason)
     end
 
     if string.find(self:GetTags(), GarrysModx.AdminMatrix.Tags["immunity"]) then
-        print("[GmodX] Immortal from being banned")
+        local str = "[GmodX] " .. tostring(self:Nick()) .. " is Immortal from being banned!"
+        print(str)
+        ply:ChatPrint(str)
         return
     end
 
@@ -77,7 +79,7 @@ concommand.Add("gmodx_banuser", function(ply, cmd, args)
     if ply:IsSuperAdmin() or string.find(ply:GetTags(), GarrysModx.AdminMatrix.Tags["banuser"]) then
         local target = GarrysModx:FindPlayer(args[1])
         if target == nil then return end
-        target:BanUser(target:SteamID64(), args[2], args[3])
+        target:BanUser(ply, target:SteamID64(), args[2], args[3])
     end
 end)
 
