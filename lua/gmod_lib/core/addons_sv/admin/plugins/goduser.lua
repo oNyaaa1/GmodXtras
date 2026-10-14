@@ -1,4 +1,5 @@
 local meta = FindMetaTable("Player")
+util.AddNetworkString("gods_target")
 function meta:GodUser(ply)
     if string.find(self:GetTags(), GarrysModx.AdminMatrix.Tags["immunity"]) and ply ~= self then
         local str = "[GmodX] " .. tostring(self:Nick()) .. " is Immortal from being Slayed except themselfs!"
@@ -7,15 +8,23 @@ function meta:GodUser(ply)
         return
     end
 
-    if not ply.God then ply.God = false end
-    ply.God = not ply.God
-    if ply.God then
+    if not self.God then self.God = false end
+    self.God = not self.God
+    if self.God then
         self:GodEnable()
+        net.Start("gods_target")
+        net.WriteEntity(self)
+        net.WriteBool(true)
+        net.Broadcast()
     else
         self:GodDisable()
+        net.Start("gods_target")
+        net.WriteEntity(self)
+        net.WriteBool(false)
+        net.Broadcast()
     end
 
-    local Godded = ply.God and "God Enabled" or "God Disabled"
+    local Godded = self.God and "God Enabled" or "God Disabled"
     local str = "[GmodX] " .. tostring(self:Nick()) .. " %s by Admin: %s!"
     print(Format(str, Godded, ply:Nick()))
     PrintMessage(HUD_PRINTTALK, Format(str, Godded, ply:Nick()))
