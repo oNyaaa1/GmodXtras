@@ -22,7 +22,7 @@ function meta:GodUser(ply)
 end
 
 concommand.Add("gmodx_god", function(ply, cmd, args)
-    if ply:IsSuperAdmin() or string.find(ply:GetTags(), GarrysModx.AdminMatrix.Tags["slayuser"]) then
+    if ply:IsSuperAdmin() or string.find(ply:GetTags(), GarrysModx.AdminMatrix.Tags["goduser"]) then
         local target = GarrysModx:FindPlayer(args[1])
         if target == nil then return end
         target:GodUser(ply)

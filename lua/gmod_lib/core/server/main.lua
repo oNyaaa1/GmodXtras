@@ -79,4 +79,11 @@ GarrysModx.ChatSay = {
         if target == NULL then return end
         target:GodUser(ply)
     end,
+    ["/ragdoll"] = function(ply, text)
+        local argz = string.Explode(" ", text)
+        local targe = argz[2]
+        local target = GarrysModx:FindPlayer(targe)
+        if target == NULL then return end
+        target:RagdollUser(ply)
+    end,
 }
