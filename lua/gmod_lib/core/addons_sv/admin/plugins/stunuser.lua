@@ -22,7 +22,7 @@ function meta:StunUser(ply, length)
 
     local str = "[GmodX] " .. tostring(self:Nick()) .. " stunned for %s second by Admin: %s!"
     print(Format(str, length, ply:Nick()))
-    ply:ChatPrint(Format(str, length, ply:Nick()))
+    PrintMessage(HUD_PRINTTALK, Format(str, length, ply:Nick()))
 end
 
 concommand.Add("gmodx_stun", function(ply, cmd, args)

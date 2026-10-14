@@ -4,7 +4,7 @@ function meta:HealUser(ply, hp)
     if self:Health() <= 0 then self:Kill() end
     local str = "[GmodX] " .. tostring(self:Nick()) .. " Healed for %s now has " .. self:Health() .. " by Admin: %s!"
     print(Format(str, ply:Nick(), self:Nick()))
-    ply:ChatPrint(Format(str, hp, ply:Nick()))
+    PrintMessage(HUD_PRINTTALK, Format(str, hp, ply:Nick()))
 end
 
 concommand.Add("gmodx_heal", function(ply, cmd, args)

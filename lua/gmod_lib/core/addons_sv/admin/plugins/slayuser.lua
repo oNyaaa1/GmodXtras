@@ -10,7 +10,7 @@ function meta:SlayUser(ply)
     self:Kill()
     local str = "[GmodX] " .. tostring(self:Nick()) .. " slayed by Admin: %s!"
     print(Format(str, ply:Nick()))
-    ply:ChatPrint(Format(str, ply:Nick()))
+    PrintMessage(HUD_PRINTTALK, Format(str, ply:Nick()))
 end
 
 concommand.Add("gmodx_slay", function(ply, cmd, args)

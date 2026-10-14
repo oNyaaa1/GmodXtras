@@ -21,7 +21,7 @@ function meta:SlapUser(ply, length)
 
     local str = "[GmodX] " .. tostring(self:Nick()) .. " slapped for %s second by Admin: %s!"
     print(Format(str, length, ply:Nick()))
-    ply:ChatPrint(Format(str, length, ply:Nick()))
+    PrintMessage(HUD_PRINTTALK, Format(str, length, ply:Nick()))
 end
 
 concommand.Add("gmodx_slap", function(ply, cmd, args)

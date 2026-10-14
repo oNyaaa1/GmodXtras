@@ -71,6 +71,7 @@ function meta:BanUser(ply, sid, time, reason)
         Nick = sql.SQLStr(self:Nick())
     })
 
+    PrintMessage(HUD_PRINTTALK, Format("%s is banned for %s \nTime Left: %s",self:Nick(), reason, tostring(string.FormattedTime(time, "Minutes:%02i Seconds:%02i"))))
     file.Write("gmodx_banuser/ban.txt", util.TableToJSON(tbl, true))
     self:Kick(reason .. "\nTime Left: " .. tostring(string.FormattedTime(time, "Minutes:%02i Seconds:%02i")))
 end

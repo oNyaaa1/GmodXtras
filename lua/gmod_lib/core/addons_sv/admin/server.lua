@@ -9,7 +9,8 @@ GarrysModx.AdminMatrix.Tags = {
     ["immunity"] = "superuser",
     ["healuser"] = "fun",
     ["slayuser"] = "fun",
-    ["stunuser"] = "fun"
+    ["stunuser"] = "fun",
+    ["armoruser"] = "fun",
 }
 
 hook.Add("InitPostEntity", "GMODXtrasAdmin", function() lite:CreateTable("gmodx_admin", "admin TEXT NOT NULL") end)
