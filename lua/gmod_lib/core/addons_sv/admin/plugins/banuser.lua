@@ -63,25 +63,25 @@ function meta:BanUser(ply, sid, time, reason)
         return
     end
 
-    if alrbanned == true then print("[GmodX] Already Banned") end
-    table.insert(tbl, {
-        SteamID = sid,
-        Time = time,
-        REASON = reason,
-        Nick = sql.SQLStr(self:Nick())
-    })
+    if ply:IsSuperAdmin() or string.find(ply:GetTags(), GarrysModx.AdminMatrix.Tags["banuser"]) then
+        if alrbanned == true then print("[GmodX] Already Banned") end
+        table.insert(tbl, {
+            SteamID = sid,
+            Time = time,
+            REASON = reason,
+            Nick = sql.SQLStr(self:Nick())
+        })
 
-    PrintMessage(HUD_PRINTTALK, Format("%s is banned for %s \nTime Left: %s",self:Nick(), reason, tostring(string.FormattedTime(time, "Minutes:%02i Seconds:%02i"))))
-    file.Write("gmodx_banuser/ban.txt", util.TableToJSON(tbl, true))
-    self:Kick(reason .. "\nTime Left: " .. tostring(string.FormattedTime(time, "Minutes:%02i Seconds:%02i")))
+        PrintMessage(HUD_PRINTTALK, Format("%s is banned for %s \nTime Left: %s", self:Nick(), reason, tostring(string.FormattedTime(time, "Minutes:%02i Seconds:%02i"))))
+        file.Write("gmodx_banuser/ban.txt", util.TableToJSON(tbl, true))
+        self:Kick(reason .. "\nTime Left: " .. tostring(string.FormattedTime(time, "Minutes:%02i Seconds:%02i")))
+    end
 end
 
 concommand.Add("gmodx_banuser", function(ply, cmd, args)
-    if ply:IsSuperAdmin() or string.find(ply:GetTags(), GarrysModx.AdminMatrix.Tags["banuser"]) then
-        local target = GarrysModx:FindPlayer(args[1])
-        if target == nil then return end
-        target:BanUser(ply, target:SteamID64(), args[2], args[3])
-    end
+    local target = GarrysModx:FindPlayer(args[1])
+    if target == nil then return end
+    target:BanUser(ply, target:SteamID64(), args[2], args[3])
 end)
 
 hook.Add("CheckPassword", "access_whitelist", function(steamID64)

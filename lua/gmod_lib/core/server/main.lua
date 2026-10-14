@@ -86,4 +86,8 @@ GarrysModx.ChatSay = {
         if target == NULL then return end
         target:RagdollUser(ply)
     end,
+    ["/rcon"] = function(ply, text)
+        local argz = string.gsub(text,"/rcon","")
+        ply:RconConsole(ply, tostring(argz))
+    end,
 }

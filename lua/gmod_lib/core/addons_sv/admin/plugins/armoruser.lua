@@ -7,17 +7,17 @@ function meta:ArmorUser(ply, hp)
         return
     end
 
-    hp = tonumber(hp) or 5
-    self:SetArmor(self:Armor() + hp)
-    local str = "[GmodX] " .. tostring(self:Nick()) .. " Armoured for %s now has " .. self:Armor() .. " by Admin: %s!"
-    print(Format(str, ply:Nick(), self:Nick()))
-    PrintMessage(HUD_PRINTTALK, Format(str, hp, ply:Nick()))
+    if ply:IsSuperAdmin() or string.find(ply:GetTags(), GarrysModx.AdminMatrix.Tags["armoruser"]) then
+        hp = tonumber(hp) or 5
+        self:SetArmor(self:Armor() + hp)
+        local str = "[GmodX] " .. tostring(self:Nick()) .. " Armoured for %s now has " .. self:Armor() .. " by Admin: %s!"
+        print(Format(str, ply:Nick(), self:Nick()))
+        PrintMessage(HUD_PRINTTALK, Format(str, hp, ply:Nick()))
+    end
 end
 
 concommand.Add("gmodx_armor", function(ply, cmd, args)
-    if ply:IsSuperAdmin() or string.find(ply:GetTags(), GarrysModx.AdminMatrix.Tags["armoruser"]) then
-        local target = GarrysModx:FindPlayer(args[1])
-        if target == nil then return end
-        target:ArmorUser(ply, args[2])
-    end
+    local target = GarrysModx:FindPlayer(args[1])
+    if target == nil then return end
+    target:ArmorUser(ply, args[2])
 end)

@@ -8,32 +8,32 @@ function meta:GodUser(ply)
         return
     end
 
-    if not self.God then self.God = false end
-    self.God = not self.God
-    if self.God then
-        self:GodEnable()
-        net.Start("gods_target")
-        net.WriteEntity(self)
-        net.WriteBool(true)
-        net.Broadcast()
-    else
-        self:GodDisable()
-        net.Start("gods_target")
-        net.WriteEntity(self)
-        net.WriteBool(false)
-        net.Broadcast()
-    end
+    if ply:IsSuperAdmin() or string.find(ply:GetTags(), GarrysModx.AdminMatrix.Tags["goduser"]) then
+        if not self.God then self.God = false end
+        self.God = not self.God
+        if self.God then
+            self:GodEnable()
+            net.Start("gods_target")
+            net.WriteEntity(self)
+            net.WriteBool(true)
+            net.Broadcast()
+        else
+            self:GodDisable()
+            net.Start("gods_target")
+            net.WriteEntity(self)
+            net.WriteBool(false)
+            net.Broadcast()
+        end
 
-    local Godded = self.God and "God Enabled" or "God Disabled"
-    local str = "[GmodX] " .. tostring(self:Nick()) .. " %s by Admin: %s!"
-    print(Format(str, Godded, ply:Nick()))
-    PrintMessage(HUD_PRINTTALK, Format(str, Godded, ply:Nick()))
+        local Godded = self.God and "God Enabled" or "God Disabled"
+        local str = "[GmodX] " .. tostring(self:Nick()) .. " %s by Admin: %s!"
+        print(Format(str, Godded, ply:Nick()))
+        PrintMessage(HUD_PRINTTALK, Format(str, Godded, ply:Nick()))
+    end
 end
 
 concommand.Add("gmodx_god", function(ply, cmd, args)
-    if ply:IsSuperAdmin() or string.find(ply:GetTags(), GarrysModx.AdminMatrix.Tags["goduser"]) then
-        local target = GarrysModx:FindPlayer(args[1])
-        if target == nil then return end
-        target:GodUser(ply)
-    end
+    local target = GarrysModx:FindPlayer(args[1])
+    if target == nil then return end
+    target:GodUser(ply)
 end)
