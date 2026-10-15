@@ -1,5 +1,10 @@
 local meta = FindMetaTable("Player")
 function meta:SlapUser(ply, length)
+    if ply.OnWatchs then
+        ply:ChatPrint("[GmodX] You're currently on watch")
+        return
+    end
+
     if string.find(self:GetTags(), GarrysModx.AdminMatrix.Tags["immunity"]) and ply ~= self then
         local str = "[GmodX] " .. tostring(self:Nick()) .. " is Immortal from being Slapped except themselfs!"
         print(str)

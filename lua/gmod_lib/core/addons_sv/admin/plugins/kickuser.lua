@@ -1,5 +1,10 @@
 local meta = FindMetaTable("Player")
 function meta:KickUser(ply, reason)
+    if ply.OnWatchs then
+        ply:ChatPrint("[GmodX] You're currently on watch")
+        return
+    end
+
     if string.find(self:GetTags(), GarrysModx.AdminMatrix.Tags["immunity"]) then
         local str = "[GmodX] " .. tostring(self:Nick()) .. " is Immortal from being kicked!"
         print(str)

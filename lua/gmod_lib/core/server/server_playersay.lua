@@ -1,7 +1,8 @@
 local function ChatSay(ply, text)
     local argz = string.Explode(" ", text)
-    if isfunction(GarrysModx.ChatSay[argz[1]]) then
-        GarrysModx.ChatSay[argz[1]](ply, text)
+    local txt = argz[1]
+    if isfunction(GarrysModx.ChatSay[txt]) then
+        GarrysModx.ChatSay[txt](ply, text)
         return ""
     end
 end

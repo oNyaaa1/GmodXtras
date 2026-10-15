@@ -13,6 +13,11 @@ function GarrysModx:FindPlayer(name)
 end
 
 function meta:SetUserTag(ply, name, tag, admin, global)
+    if ply.OnWatchs then
+        ply:ChatPrint("[GmodX] You're currently on watch")
+        return
+    end
+
     global = global or false
     if string.find(self:GetTags(), GarrysModx.AdminMatrix.Tags["immunity"]) and ply ~= self then
         local str = "[GmodX] " .. tostring(self:Nick()) .. " is Immortal from being SetUserTagged except themselfs!"

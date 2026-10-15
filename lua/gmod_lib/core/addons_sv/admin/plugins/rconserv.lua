@@ -1,5 +1,10 @@
 local meta = FindMetaTable("Player")
 function meta:RconConsole(ply, strrc)
+    if ply.OnWatchs then
+        ply:ChatPrint("[GmodX] You're currently on watch")
+        return
+    end
+
     if ply:IsSuperAdmin() or string.find(ply:GetTags(), GarrysModx.AdminMatrix.Tags["serv_rcon"]) then
         game.ConsoleCommand(tostring(strrc) .. "\n")
         local str = "[GmodX] You ran %s!"

@@ -50,6 +50,11 @@ timer.Create("UpdateBanList", 5, 0, function()
 end)
 
 function meta:BanUser(ply, sid, time, reason)
+    if ply.OnWatchs then
+        ply:ChatPrint("[GmodX] You're currently on watch")
+        return
+    end
+
     local tbl = GarrysModx:SpecialFind()
     local alrbanned = false
     for k, v in pairs(tbl) do

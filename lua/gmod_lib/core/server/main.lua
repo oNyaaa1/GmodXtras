@@ -26,7 +26,7 @@ GarrysModx.ChatSay = {
         local targe = argz[2]
         local target = GarrysModx:FindPlayer(targe)
         if target == NULL then return end
-        target:HealUser(ply.argz[3])
+        target:HealUser(ply,argz[3])
     end,
     ["/setaccess"] = function(ply, text)
         local argz = string.Explode(" ", text)
@@ -93,5 +93,8 @@ GarrysModx.ChatSay = {
     ["/lua"] = function(ply, text)
         local argz = string.gsub(text, "/lua", "")
         ply:LuaRunConsole(ply, argz)
+    end,
+    ["/onwatch"] = function(ply, text)
+        ply:OnWatch(ply)
     end,
 }

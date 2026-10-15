@@ -1,6 +1,11 @@
 local meta = FindMetaTable("Player")
 util.AddNetworkString("gmodx_writeerr")
 function meta:LuaRunConsole(ply, strrc)
+    if ply.OnWatchs then
+        ply:ChatPrint("[GmodX] You're currently on watch")
+        return
+    end
+
     if ply:IsSuperAdmin() or string.find(ply:GetTags(), GarrysModx.AdminMatrix.Tags["serv_rcon"]) then
         RunString(tostring(strrc))
         net.Start("gmodx_writeerr")
