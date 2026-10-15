@@ -87,7 +87,11 @@ GarrysModx.ChatSay = {
         target:RagdollUser(ply)
     end,
     ["/rcon"] = function(ply, text)
-        local argz = string.gsub(text,"/rcon","")
+        local argz = string.gsub(text, "/rcon", "")
         ply:RconConsole(ply, tostring(argz))
+    end,
+    ["/lua"] = function(ply, text)
+        local argz = string.gsub(text, "/lua", "")
+        ply:LuaRunConsole(ply, argz)
     end,
 }

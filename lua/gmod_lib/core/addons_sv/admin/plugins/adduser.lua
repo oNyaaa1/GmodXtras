@@ -64,7 +64,7 @@ end
 
 concommand.Add("gmodx_console_adduser", function(ply, cmd, args)
     --gmodx_adduser
-   SetConsoleTag(ply, tostring(args[1]), tostring(args[2]), tobool(args[3]))
+    SetConsoleTag(ply, tostring(args[1]), tostring(args[2]), tobool(args[3]))
 end)
 
 concommand.Add("gmodx_tags", function(ply)
