@@ -1,22 +1,21 @@
 **GmodX Admin Mod**
 
 **Here is a list of stuff**
-**
-Console command: gmodx_tags
-[GmodX] Your Admin Tags 'fun'
-[Command: banuser] - [Tag: action]
-[Command: kickuser] - [Tag: action]
-[Command: goduser] - [Tag: fun]
-[Command: ragdolluser] - [Tag: fun]
-[Command: slayuser] - [Tag: fun]
-[Command: healuser] - [Tag: fun]
-[Command: armoruser] - [Tag: fun]
-[Command: stunuser] - [Tag: fun]
-[Command: cexecuser] - [Tag: rcon]
-[Command: serv_rcon] - [Tag: rcon]
-[Command: adduser] - [Tag: superuser]
-[Command: immunity] - [Tag: superuser]
-[Command: guide] - [Tag: u]
+**Console command: gmodx_tags
+**[GmodX] Your Admin Tags 'fun'
+**[Command: banuser] - [Tag: action]
+**[Command: kickuser] - [Tag: action]
+**[Command: goduser] - [Tag: fun]
+**[Command: ragdolluser] - [Tag: fun]
+**[Command: slayuser] - [Tag: fun]
+**[Command: healuser] - [Tag: fun]
+**[Command: armoruser] - [Tag: fun]
+**[Command: stunuser] - [Tag: fun]
+**[Command: cexecuser] - [Tag: rcon]
+**[Command: serv_rcon] - [Tag: rcon]
+**[Command: adduser] - [Tag: superuser]
+**[Command: immunity] - [Tag: superuser]
+**[Command: guide] - [Tag: u]
 
 Console command: gmodx_tutorial 
 Tutorial Guide:
