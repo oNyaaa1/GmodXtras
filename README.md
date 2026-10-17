@@ -1,9 +1,13 @@
 **GmodX Admin Mod**
 
 **Here is a list of stuff**
+
 **Console command: gmodx_tags**
+
 **[GmodX] Your Admin Tags 'fun'**
+
 **[Command: banuser] - [Tag: action]**
+
 **[Command: kickuser] - [Tag: action]**
 **[Command: goduser] - [Tag: fun]**
 **[Command: ragdolluser] - [Tag: fun]**
