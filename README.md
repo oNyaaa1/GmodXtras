@@ -1,1 +1,1 @@
-** GmodX Admin Mod **
+***GmodX Admin Mod***
